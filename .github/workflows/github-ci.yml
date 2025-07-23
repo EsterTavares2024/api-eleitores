@@ -14,7 +14,6 @@ env:
   PLATFORMS: linux/amd64,linux/arm64
   CACHE_DIR: .buildx-cache
 
-
 jobs:
   lint-code:
     name: Lint básico
@@ -101,6 +100,8 @@ jobs:
           KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
           TF_VAR_docker_image_name: ${{ env.DOCKER_IMAGE_NAME }}
           TF_VAR_docker_image_tag: ${{ github.run_number }}
+          TF_VAR_docker_user: ${{ env.DOCKER_USER }}
+          TF_VAR_docker_pass: ${{ secrets.DOCKER_PASS }}
         run: |
           terraform init
           terraform validate
