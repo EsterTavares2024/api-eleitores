@@ -5,7 +5,7 @@ on:
     branches: [test, main]
   pull_request:
     branches: [main]
-  workflow_dispatch:
+  workflow_dispatch: # Permite execução manual
 
 env:
   DOCKER_USER: estertavares2025
@@ -18,6 +18,7 @@ jobs:
   lint-code:
     name: Lint básico
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/test'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -31,6 +32,7 @@ jobs:
   golangci-lint:
     name: Lint avançado
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/test'
     steps:
       - uses: actions/checkout@v4
       - uses: golangci/golangci-lint-action@v6
@@ -40,6 +42,7 @@ jobs:
   run-tests:
     name: Testes
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/test'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
