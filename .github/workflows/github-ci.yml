@@ -9,10 +9,11 @@ on:
 
 env:
   DOCKER_USER: estertavares2025
-  DOCKER_IMAGE_NAME: ${{ env.DOCKER_USER }}/eleitor-projeto-app
+  DOCKER_IMAGE_NAME: estertavares2025/eleitor-projeto-app
   DOCKER_REGISTRY: registry.hub.docker.com
   PLATFORMS: linux/amd64,linux/arm64
   CACHE_DIR: .buildx-cache
+
 
 jobs:
   lint-code:
