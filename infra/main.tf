@@ -7,9 +7,8 @@ terraform {
   }
 }
 
-provider "koyeb" {
-  token = var.koyeb_token != "" ? var.koyeb_token : (try(env.KOYEB_TOKEN, ""))
-}
+# O token será lido automaticamente da variável de ambiente KOYEB_TOKEN
+provider "koyeb" {}
 
 resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"
@@ -24,8 +23,8 @@ resource "koyeb_service" "eleitor" {
     protocol = "HTTP"
   }
 
-  instance_type = "micro-1x" # ou altere conforme necessário
-  regions       = ["fra"]    # Frankfurt, altere se preferir outro
+  instance_type = "micro-1x"
+  regions       = ["fra"] # Frankfurt
 
   docker {
     image = "${var.docker_image_name}:${var.docker_image_tag}"

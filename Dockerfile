@@ -21,3 +21,10 @@ RUN echo '<Directory /var/www/html/>\n\
     Require all granted\n\
 </Directory>' > /etc/apache2/conf-available/allow-override.conf \
     && a2enconf allow-override
+# Copia os arquivos da aplicação
+COPY . /var/www/html/
+
+# Instala o Composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer install --no-interaction

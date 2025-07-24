@@ -56,14 +56,14 @@ jobs:
       - name: Checkout Código
         uses: actions/checkout@v4
 
-      - name: Instalar PHP
+      - name: Instalar PHP e extensões
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-          extensions: mbstring, pdo, pdo_mysql
+          extensions: mbstring, pdo, pdo_mysql, dom
           tools: composer
 
-      - name: Instalar dependências
+      - name: Instalar composer
         run: composer install --no-interaction --prefer-dist
 
       - name: Copiar .env
@@ -75,7 +75,7 @@ jobs:
       - name: Rodar migrations
         run: php artisan migrate --force
 
-      - name: Rodar PHPUnit
+      - name: Rodar PHPUnit 
         run: vendor/bin/phpunit --log-junit report.xml
 
       - name: Upload do Report de Teste
