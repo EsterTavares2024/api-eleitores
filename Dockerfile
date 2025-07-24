@@ -1,34 +1,35 @@
 FROM php:8.1-apache
 
-# Instala extensões necessárias
-RUN apt-get update && apt-get install -y libzip-dev unzip zip \
-    && docker-php-ext-install mysqli pdo pdo_mysql zip
+# Define o diretório de trabalho padrão dentro do container
+WORKDIR /var/www/html
 
-# Ativa o módulo de reescrita
+# Instala dependências de sistema e extensões do PHP necessárias
+RUN apt-get update && apt-get install -y \
+    libzip-dev unzip zip curl git \
+    && docker-php-ext-install pdo pdo_mysql mysqli zip \
+    && apt-get clean
+
+# Ativa o módulo de reescrita do Apache
 RUN a2enmod rewrite
 
-# Copia os arquivos da aplicação
-COPY . /var/www/html/
+# Copia todos os arquivos da aplicação para o container
+COPY . .
 
 # Corrige permissões
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Ajusta configuração do Apache
+# Configura o Apache para permitir .htaccess
 RUN echo '<Directory /var/www/html/>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
 </Directory>' > /etc/apache2/conf-available/allow-override.conf \
     && a2enconf allow-override
-# Copia os arquivos da aplicação
-COPY . /var/www/html/
 
-# Instala o Composer
+# Instala o Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && composer install --no-interaction
+    && mv composer.phar /usr/local/bin/composer
 
-
-
-    
+# Instala dependências PHP com Composer
+RUN composer install --no-interaction
