@@ -1,6 +1,11 @@
 <?php
 
-$host   = 'db'; // Nome do serviço no docker-compose
+// Detecta se está rodando no GitHub Actions
+$isCI = getenv('GITHUB_ACTIONS') === 'true';
+
+// Se estiver rodando no CI, usa o nome do serviço Docker MySQL
+$host = $isCI ? 'mysql' : '127.0.0.1'; 
+
 $user   = 'Admin';
 $pass   = 'Admin#25';
 $dbname = 'db';
