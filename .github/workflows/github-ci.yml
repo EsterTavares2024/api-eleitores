@@ -49,8 +49,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: Admin#25
           MYSQL_DATABASE: db
-          MYSQL_USER: Admin
-          MYSQL_PASSWORD: Admin#25
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: 123456
         ports:
           - 3306:3306
         options: >-
