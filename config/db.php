@@ -1,13 +1,14 @@
 <?php
 
-$isCI = getenv('GITHUB_ACTIONS') === 'true';
+$host = getenv('DB_HOST') ?: '127.0.0.1';
+$dbname = getenv('DB_NAME') ?: 'db';
+$user = getenv('DB_USER') ?: 'admin';
+$pass = getenv('DB_PASS') ?: 'admin123';
 
-$host = '127.0.0.1';
-$user = $isCI ? 'root' : 'admin';
-$pass = $isCI ? 'root' : 'admin123';
-$dbname = 'db';
-
-$conn = new mysqli($host, $user, $pass, $dbname);
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $conn;
+} catch (PDOException $e) {
+    die("Erro na conexão: " . $e->getMessage());
 }
