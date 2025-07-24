@@ -73,6 +73,18 @@ jobs:
       - name: Instalar composer
         run: composer install --no-interaction --prefer-dist
 
+      - name: Aguardar MySQL ficar disponível
+        run: |
+          echo "Esperando MySQL ficar disponível..."
+          for i in {1..30}; do
+            if mysqladmin ping -h mysql -uAdmin -pAdmin#25 --silent; then
+              echo "MySQL está pronto!"
+              break
+            fi
+            echo "Aguardando MySQL... ($i)"
+            sleep 2
+          done
+          
       - name: Rodar PHPUnit
         run: |
           vendor/bin/phpunit --log-junit report.xml
