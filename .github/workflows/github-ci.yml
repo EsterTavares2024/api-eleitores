@@ -47,17 +47,17 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: Admin#25
+          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: db
           MYSQL_USER: admin
-          MYSQL_PASSWORD: 123456
+          MYSQL_PASSWORD: admin123
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=5
+          --health-retries=3
 
     steps:
       - name: Checkout Código
@@ -72,19 +72,13 @@ jobs:
 
       - name: Instalar composer
         run: composer install --no-interaction --prefer-dist
-
-      - name: Aguardar MySQL ficar disponível
+      - name: Esperar MySQL estar pronto
         run: |
-          echo "Esperando MySQL ficar disponível..."
-          for i in {1..30}; do
-            if mysqladmin ping -h mysql -uAdmin -pAdmin#25 --silent; then
-              echo "MySQL está pronto!"
-              break
-            fi
-            echo "Aguardando MySQL... ($i)"
-            sleep 2
+         until mysqladmin ping -h 127.0.0.1 -uadmin -padmin123 --silent; do
+          echo "Aguardando MySQL iniciar..."; sleep 3;
           done
-          
+
+
       - name: Rodar PHPUnit
         run: |
           vendor/bin/phpunit --log-junit report.xml
