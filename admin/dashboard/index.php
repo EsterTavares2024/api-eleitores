@@ -13,7 +13,7 @@ $userId = $_SESSION['user_id'];
 
 // Totais por usuário logado
 $totalCandidates = $conn->query("SELECT COUNT(*) as total FROM candidates WHERE created_by = $userId")->fetch_assoc()['total'];
-$totalElectors = $conn->query("SELECT COUNT(*) as total FROM customers WHERE created_by = $userId")->fetch_assoc()['total'];
+$totalElectors   = $conn->query("SELECT COUNT(*) as total FROM customers WHERE created_by = $userId")->fetch_assoc()['total'];
 
 // Votos por candidato (somente os criados pelo user atual)
 $votosQuery = $conn->prepare("
@@ -28,10 +28,10 @@ $votosQuery->execute();
 $votosResult = $votosQuery->get_result();
 
 $labels = [];
-$data = [];
+$data   = [];
 while ($row = $votosResult->fetch_assoc()) {
     $labels[] = $row['name'];
-    $data[] = $row['votos'];
+    $data[]   = $row['votos'];
 }
 ?>
 

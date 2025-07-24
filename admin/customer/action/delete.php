@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../../login.php");
@@ -8,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 include("../../../config/db.php");
 
 $customer_id = intval($_GET['id'] ?? 0);
-$user_id = intval($_SESSION['user_id']);
+$user_id     = intval($_SESSION['user_id']);
 
 // Verifica se o eleitor pertence ao usuário
 $stmt = $conn->prepare("SELECT id FROM customers WHERE id = ? AND created_by = ?");

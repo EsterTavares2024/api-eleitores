@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../../login.php");
@@ -7,27 +8,32 @@ if (!isset($_SESSION['user_id'])) {
 
 include("../../../config/db.php");
 
-function isValidCPF($cpf) {
+function isValidCPF($cpf)
+{
     $cpf = preg_replace('/[^0-9]/', '', $cpf);
-    if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)) return false;
+    if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)) {
+        return false;
+    }
     for ($t = 9; $t < 11; $t++) {
         for ($d = 0, $c = 0; $c < $t; $c++) {
             $d += $cpf[$c] * (($t + 1) - $c);
         }
         $d = ((10 * $d) % 11) % 10;
-        if ($cpf[$c] != $d) return false;
+        if ($cpf[$c] != $d) {
+            return false;
+        }
     }
     return true;
 }
 
-$customer_id = intval($_POST['id'] ?? 0);
-$name = trim($_POST['name'] ?? '');
-$cpf = preg_replace('/\D/', '', $_POST['cpf'] ?? '');
+$customer_id  = intval($_POST['id'] ?? 0);
+$name         = trim($_POST['name'] ?? '');
+$cpf          = preg_replace('/\D/', '', $_POST['cpf'] ?? '');
 $candidate_id = intval($_POST['candidate_id'] ?? 0);
 $neighborhood = trim($_POST['neighborhood'] ?? '');
-$cep = trim($_POST['cep'] ?? '');
-$necessity = trim($_POST['necessity'] ?? '');
-$user_id = intval($_SESSION['user_id']);
+$cep          = trim($_POST['cep'] ?? '');
+$necessity    = trim($_POST['necessity'] ?? '');
+$user_id      = intval($_SESSION['user_id']);
 
 if (!isValidCPF($cpf)) {
     header("Location: ../edit.php?id=$customer_id&error=invalidcpf");

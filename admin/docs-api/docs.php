@@ -9,11 +9,11 @@ include("../../config/db.php");
 
 // Recupera token do usuário logado
 $user_id = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT token FROM api_tokens WHERE user_id = ?");
+$stmt    = $conn->prepare("SELECT token FROM api_tokens WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
-$token = $result->fetch_assoc()['token'] ?? '[SEU_TOKEN_AQUI]';
+$token  = $result->fetch_assoc()['token'] ?? '[SEU_TOKEN_AQUI]';
 
 include("../../layout/header.php");
 include("../../layout/sidebar.php");

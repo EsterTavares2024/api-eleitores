@@ -16,7 +16,7 @@ $stmt = $conn->prepare("SELECT token FROM api_tokens WHERE user_id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
-$token = $result->fetch_assoc()['token'] ?? null;
+$token  = $result->fetch_assoc()['token'] ?? null;
 $stmt->close();
 ?>
 

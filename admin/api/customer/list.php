@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: application/json');
 include("../../../config/db.php");
 
@@ -11,11 +12,11 @@ if (!isset($headers['Authorization']) || !str_starts_with($headers['Authorizatio
 }
 
 $token = trim(str_replace('Bearer', '', $headers['Authorization']));
-$stmt = $conn->prepare("SELECT user_id FROM api_tokens WHERE token = ?");
+$stmt  = $conn->prepare("SELECT user_id FROM api_tokens WHERE token = ?");
 $stmt->bind_param("s", $token);
 $stmt->execute();
 $result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$user   = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {

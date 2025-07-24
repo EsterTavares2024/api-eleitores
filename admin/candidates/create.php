@@ -10,8 +10,8 @@ include("../../config/db.php");
 
 // Verificação e salvamento
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = trim($_POST['name']);
-    $party = trim($_POST['party']);
+    $name        = trim($_POST['name']);
+    $party       = trim($_POST['party']);
     $description = trim($_POST['description']);
 
     // Verifica se o nome está vazio

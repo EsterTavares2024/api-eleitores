@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: application/json');
 include("../config/db.php");
 
@@ -10,7 +11,7 @@ if (!isset($data['name'], $data['email'], $data['phone'])) {
     exit;
 }
 
-$name = $data['name'];
+$name  = $data['name'];
 $email = $data['email'];
 $phone = $data['phone'];
 

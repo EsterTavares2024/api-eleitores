@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['user_id']) || !isset($_GET['candidate_id'])) {
     header("Location: ../../../login.php");
@@ -7,7 +8,7 @@ if (!isset($_SESSION['user_id']) || !isset($_GET['candidate_id'])) {
 
 include("../../../config/db.php");
 
-$userId = $_SESSION['user_id'];
+$userId       = $_SESSION['user_id'];
 $candidate_id = intval($_GET['candidate_id']);
 
 header('Content-Type: text/csv; charset=utf-8');

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../login.php");
@@ -7,10 +8,10 @@ if (!isset($_SESSION['user_id'])) {
 
 include("../../../config/db.php");
 
-$userId = $_SESSION['user_id'];
-$id = intval($_POST['id'] ?? 0);
-$name = trim($_POST['name'] ?? '');
-$party = trim($_POST['party'] ?? '');
+$userId      = $_SESSION['user_id'];
+$id          = intval($_POST['id'] ?? 0);
+$name        = trim($_POST['name'] ?? '');
+$party       = trim($_POST['party'] ?? '');
 $description = trim($_POST['description'] ?? '');
 
 if ($id > 0 && $name) {

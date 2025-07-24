@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: application/json');
 include("../../../config/db.php");
 
@@ -11,11 +12,11 @@ if (!isset($headers['Authorization']) || !str_starts_with($headers['Authorizatio
 }
 
 $token = trim(str_replace('Bearer', '', $headers['Authorization']));
-$stmt = $conn->prepare("SELECT user_id FROM api_tokens WHERE token = ?");
+$stmt  = $conn->prepare("SELECT user_id FROM api_tokens WHERE token = ?");
 $stmt->bind_param("s", $token);
 $stmt->execute();
 $result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$user   = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {
@@ -27,7 +28,7 @@ if (!$user) {
 $user_id = $user['user_id'];
 
 // Verifica se o ID foi enviado
-$body = json_decode(file_get_contents("php://input"), true);
+$body        = json_decode(file_get_contents("php://input"), true);
 $customer_id = intval($body['id'] ?? 0);
 if (!$customer_id) {
     http_response_code(400);

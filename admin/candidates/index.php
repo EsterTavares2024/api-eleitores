@@ -19,7 +19,7 @@ $limit = isset($_GET['limit']) && in_array((int)$_GET['limit'], $limitOptions)
     ? (int)$_GET['limit']
     : $defaultLimit;
 
-$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$page   = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $offset = ($page - 1) * $limit;
 
 // Total de registros do usuário
@@ -27,7 +27,7 @@ $countStmt = $conn->prepare("SELECT COUNT(*) as total FROM candidates WHERE crea
 $countStmt->bind_param("i", $userId);
 $countStmt->execute();
 $countResult = $countStmt->get_result()->fetch_assoc();
-$totalPages = ceil($countResult['total'] / $limit);
+$totalPages  = ceil($countResult['total'] / $limit);
 $countStmt->close();
 
 // Buscar candidatos do usuário
@@ -106,29 +106,29 @@ $result = $stmt->get_result();
 
           <?php
             $visiblePages = 5;
-            $start = max(1, $page - floor($visiblePages / 2));
-            $end = min($totalPages, $start + $visiblePages - 1);
+$start                    = max(1, $page - floor($visiblePages / 2));
+$end                      = min($totalPages, $start + $visiblePages - 1);
 
-            if ($start > 1) {
-                echo '<li class="page-item"><a class="page-link" href="?page=1&limit=' . $limit . '">1</a></li>';
-                if ($start > 2) {
-                    echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-                }
-            }
+if ($start > 1) {
+    echo '<li class="page-item"><a class="page-link" href="?page=1&limit=' . $limit . '">1</a></li>';
+    if ($start > 2) {
+        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+    }
+}
 
-            for ($i = $start; $i <= $end; $i++): ?>
+for ($i = $start; $i <= $end; $i++): ?>
               <li class="page-item <?= $i == $page ? 'active' : '' ?>">
                 <a class="page-link" href="?page=<?= $i ?>&limit=<?= $limit ?>"><?= $i ?></a>
               </li>
           <?php endfor;
 
-            if ($end < $totalPages) {
-                if ($end < $totalPages - 1) {
-                    echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-                }
-                echo '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '&limit=' . $limit . '">' . $totalPages . '</a></li>';
-            }
-          ?>
+if ($end < $totalPages) {
+    if ($end < $totalPages - 1) {
+        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+    }
+    echo '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '&limit=' . $limit . '">' . $totalPages . '</a></li>';
+}
+?>
 
           <?php if ($page < $totalPages): ?>
             <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>">»</a></li>

@@ -25,7 +25,7 @@ $query = "
 $stmt = $conn->prepare($query);
 $stmt->bind_param("ii", $customer_id, $_SESSION['user_id']);
 $stmt->execute();
-$result = $stmt->get_result();
+$result   = $stmt->get_result();
 $customer = $result->fetch_assoc();
 
 if (!$customer) {
@@ -34,7 +34,7 @@ if (!$customer) {
 
 // Buscar candidatos
 $userId = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT id, name FROM candidates WHERE created_by = ? ORDER BY name ASC");
+$stmt   = $conn->prepare("SELECT id, name FROM candidates WHERE created_by = ? ORDER BY name ASC");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $candidates = $stmt->get_result();

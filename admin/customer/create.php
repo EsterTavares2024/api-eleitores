@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-  header("Location: ../../login.php");
-  exit;
+    header("Location: ../../login.php");
+    exit;
 }
 
 include("../../config/db.php");
@@ -11,7 +11,7 @@ include("../../layout/sidebar.php");
 
 // Buscar candidatos
 $userId = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT id, name FROM candidates WHERE created_by = ? ORDER BY name ASC");
+$stmt   = $conn->prepare("SELECT id, name FROM candidates WHERE created_by = ? ORDER BY name ASC");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $candidates = $stmt->get_result();

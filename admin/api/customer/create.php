@@ -1,4 +1,5 @@
 <?php
+
 // admin/api/customer/create.php
 
 header('Content-Type: application/json');
@@ -20,7 +21,7 @@ $stmt = $conn->prepare("SELECT user_id FROM api_tokens WHERE token = ?");
 $stmt->bind_param("s", $token);
 $stmt->execute();
 $result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$user   = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {
@@ -32,16 +33,21 @@ if (!$user) {
 $user_id = $user['user_id'];
 
 // Função para validar CPF com dígito verificador
-function isValidCPF($cpf) {
+function isValidCPF($cpf)
+{
     $cpf = preg_replace('/[^0-9]/', '', $cpf);
-    if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)) return false;
+    if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)) {
+        return false;
+    }
 
     for ($t = 9; $t < 11; $t++) {
         for ($d = 0, $c = 0; $c < $t; $c++) {
             $d += $cpf[$c] * (($t + 1) - $c);
         }
         $d = ((10 * $d) % 11) % 10;
-        if ($cpf[$c] != $d) return false;
+        if ($cpf[$c] != $d) {
+            return false;
+        }
     }
     return true;
 }

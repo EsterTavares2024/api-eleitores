@@ -20,7 +20,7 @@ if ($id <= 0) {
 $stmt = $conn->prepare("SELECT * FROM candidates WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
-$result = $stmt->get_result();
+$result    = $stmt->get_result();
 $candidate = $result->fetch_assoc();
 
 if (!$candidate) {

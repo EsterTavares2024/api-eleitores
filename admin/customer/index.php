@@ -20,7 +20,7 @@ $limit = isset($_GET['limit']) && in_array(intval($_GET['limit']), $limitOptions
   ? intval($_GET['limit'])
   : $defaultLimit;
 
-$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$page   = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
 // Total de registros
@@ -45,9 +45,10 @@ $query = "
     LIMIT ? OFFSET ?
 ";
 
-function formatCPF($cpf) {
-  $cpf = preg_replace('/[^0-9]/', '', $cpf);
-  return vsprintf('%s.%s.%s-%s', str_split($cpf, 3) + [9 => substr($cpf, 9, 2)]);
+function formatCPF($cpf)
+{
+    $cpf = preg_replace('/[^0-9]/', '', $cpf);
+    return vsprintf('%s.%s.%s-%s', str_split($cpf, 3) + [9 => substr($cpf, 9, 2)]);
 }
 $stmt = $conn->prepare($query);
 $stmt->bind_param("iii", $userId, $limit, $offset);
@@ -71,13 +72,13 @@ $result = $stmt->get_result();
               <option value="">Exportar por Candidato</option>
               <?php
               $userId = $_SESSION['user_id'];
-              $stmt = $conn->prepare("SELECT id, name FROM candidates WHERE created_by = ? ORDER BY name ASC");
-              $stmt->bind_param("i", $userId);
-              $stmt->execute();
-              $cands = $stmt->get_result();
-              while ($c = $cands->fetch_assoc()):
-              
-              ?>
+$stmt                 = $conn->prepare("SELECT id, name FROM candidates WHERE created_by = ? ORDER BY name ASC");
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$cands = $stmt->get_result();
+while ($c = $cands->fetch_assoc()):
+
+    ?>
                 <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
               <?php endwhile; ?>
             </select>
@@ -164,29 +165,29 @@ $result = $stmt->get_result();
 
     <?php
       $visiblePages = 5;
-      $start = max(1, $page - floor($visiblePages / 2));
-      $end = min($totalPages, $start + $visiblePages - 1);
+$start              = max(1, $page - floor($visiblePages / 2));
+$end                = min($totalPages, $start + $visiblePages - 1);
 
-      if ($start > 1) {
-          echo '<li class="page-item"><a class="page-link" href="?page=1&limit=' . $limit . '">1</a></li>';
-          if ($start > 2) {
-              echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-          }
-      }
+if ($start > 1) {
+    echo '<li class="page-item"><a class="page-link" href="?page=1&limit=' . $limit . '">1</a></li>';
+    if ($start > 2) {
+        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+    }
+}
 
-      for ($i = $start; $i <= $end; $i++): ?>
+for ($i = $start; $i <= $end; $i++): ?>
         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
           <a class="page-link" href="?page=<?= $i ?>&limit=<?= $limit ?>"><?= $i ?></a>
         </li>
     <?php endfor;
 
-      if ($end < $totalPages) {
-          if ($end < $totalPages - 1) {
-              echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-          }
-          echo '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '&limit=' . $limit . '">' . $totalPages . '</a></li>';
-      }
-    ?>
+if ($end < $totalPages) {
+    if ($end < $totalPages - 1) {
+        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+    }
+    echo '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '&limit=' . $limit . '">' . $totalPages . '</a></li>';
+}
+?>
 
     <?php if ($page < $totalPages): ?>
       <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>">»</a></li>

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../../login.php");
@@ -18,7 +19,7 @@ $check = $conn->prepare("
 $check->bind_param("i", $userId);
 $check->execute();
 $result = $check->get_result();
-$data = $result->fetch_assoc();
+$data   = $result->fetch_assoc();
 $check->close();
 
 if ($data['total'] > 0) {

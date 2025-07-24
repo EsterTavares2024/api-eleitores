@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: application/json');
 
 include("../../../config/db.php");
@@ -18,7 +19,7 @@ $stmt = $conn->prepare("SELECT user_id FROM api_tokens WHERE token = ?");
 $stmt->bind_param("s", $token);
 $stmt->execute();
 $result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$user   = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {
@@ -43,5 +44,5 @@ while ($row = $result->fetch_assoc()) {
 http_response_code(200);
 echo json_encode([
     'success' => true,
-    'data' => $data
+    'data'    => $data
 ]);
