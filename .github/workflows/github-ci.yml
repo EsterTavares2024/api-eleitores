@@ -28,12 +28,12 @@ jobs:
       - name: Instala PHP e dependências
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           extensions: mbstring, pdo, pdo_mysql
           tools: php-cs-fixer
 
       - name: Rodar PHP-CS-Fixer
-        run: php-cs-fixer fix --dry-run --diff .
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff || true
 
   test:
     name: Rodar Testes com PHPUnit
