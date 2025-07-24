@@ -3,10 +3,10 @@
 // Detecta se está rodando no GitHub Actions
 $isCI = getenv('GITHUB_ACTIONS') === 'true';
 
-// Se estiver rodando no CI, usa o nome do serviço Docker MySQL
-$host = getenv('GITHUB_ACTIONS') === 'true' ? 'mysql:8.0' : '127.0.0.1';
-$user = 'Admin';
-$pass = Admin#25;
+// Define host do banco de dados dependendo do ambiente
+$host = $isCI ? '127.0.0.1' : 'db';  // 👈 importante
+$user = 'admin';
+$pass = 'admin123';
 $dbname = 'db';
 
 $conn = new mysqli($host, $user, $pass, $dbname);

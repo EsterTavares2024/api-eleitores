@@ -28,3 +28,7 @@ COPY . /var/www/html/
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && composer install --no-interaction
+
+
+
+    
