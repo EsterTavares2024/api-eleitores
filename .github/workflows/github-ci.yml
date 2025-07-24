@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch: # Habilita execução manual no GitHub
 
 env:
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -73,55 +74,19 @@ jobs:
       - name: Rodar PHPUnit
         run: |
           cd api-eleitores
-            vendor/bin/phpunit --log-junit report.xml
-            
+          vendor/bin/phpunit --log-junit report.xml
+
       - name: Upload do Report de Teste
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: report
-          path: report.xml
-
-  release:
-    name: Build & Push Docker Image
-    runs-on: ubuntu-latest
-    needs: [build-lint, test]
-    steps:
-      - name: Checkout Código
-        uses: actions/checkout@v4
-
-      - name: Login no Docker Hub
-        run: echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
-
-      - name: Construir e Enviar Imagem
-        run: |
-          docker build -t $DOCKER_IMAGE_NAME:latest .
-          docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:${{ github.run_number }}
-          docker push $DOCKER_IMAGE_NAME:latest
-          docker push $DOCKER_IMAGE_NAME:${{ github.run_number }}
-
-  deploy:
-    name: Deploy para Koyeb
-    runs-on: ubuntu-latest
-    needs: release
-    steps:
-      - name: Checkout Código
-        uses: actions/checkout@v4
-
-      - name: Instalar Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Configurar Terraform
-        run: |
-          cd infra
-          terraform init
-          terraform apply -auto-approve -var="docker_image_name=${{ env.DOCKER_IMAGE_NAME }}" -var="docker_image_tag=${{ github.run_number }}"
+          path: api-eleitores/report.xml
 
   cleanup:
     name: Cleanup - Destroy Infra
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    needs: deploy
+    if: github.event_name == 'workflow_dispatch' # Executa apenas manualmente
     steps:
       - name: Checkout Código
         uses: actions/checkout@v4
