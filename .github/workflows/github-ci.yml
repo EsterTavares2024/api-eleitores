@@ -78,7 +78,6 @@ jobs:
           echo "Aguardando MySQL iniciar..."; sleep 3;
           done
 
-
       - name: Rodar PHPUnit
         run: |
           vendor/bin/phpunit --log-junit report.xml
@@ -91,10 +90,6 @@ jobs:
           path: report.xml
 
   # STAGE: release
-  on:
-  push:
-  branch:
-      - main
   release:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
