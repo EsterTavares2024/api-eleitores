@@ -2,13 +2,10 @@ name: CI/CD Pipeline - Eleitor Projeto
 
 on:
   push:
-    branches:
-      - test
-      - main
+    branches: [ test, main ]
   pull_request:
-    branches:
-      - main
-  workflow_dispatch: # Permite execução manual (necessário para cleanup)
+    branches: [ main ]
+  workflow_dispatch: # Necessário para rodar cleanup manualmente
 
 env:
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -52,15 +49,15 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: Admin#25
           MYSQL_DATABASE: db
-          MYSQL_USER: admin
-          MYSQL_PASSWORD: 123456
+          MYSQL_USER: Admin
+          MYSQL_PASSWORD: Admin#25
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping"
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=3
+          --health-retries=5
 
     steps:
       - name: Checkout Código
