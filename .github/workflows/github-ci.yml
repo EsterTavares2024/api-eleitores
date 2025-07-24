@@ -111,7 +111,7 @@ jobs:
           docker push $DOCKER_IMAGE_NAME:${{ github.run_number }}
 
 # STAGE: deploy
-deploy:
+Deploy:
   name: Deploy para Koyeb
   runs-on: ubuntu-latest
   needs: release
@@ -136,8 +136,6 @@ deploy:
           -var="docker_image_name=${DOCKER_IMAGE_NAME}" \
           -var="docker_image_tag=${DOCKER_IMAGE_TAG}" \
           -var="koyeb_token=${KOYEB_TOKEN}"
-  only:
-      - main
       
 
   # STAGE: cleanup (manual only)
@@ -158,6 +156,3 @@ deploy:
           cd infra
           terraform init
           terraform destroy -auto-approve
-    only:
-          - main
-    when: manual
