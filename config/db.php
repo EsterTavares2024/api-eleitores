@@ -4,7 +4,7 @@
 $isCI = getenv('GITHUB_ACTIONS') === 'true';
 
 // Se estiver rodando no CI, usa o nome do serviço Docker MySQL
-$host = $isCI ? 'mysql' : '127.0.0.1'; 
+$host = getenv('GITHUB_ACTIONS') === 'true' ? 'mysql' : '127.0.0.1';
 
 $user   = 'Admin';
 $pass   = 'Admin#25';

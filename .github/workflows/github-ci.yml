@@ -72,12 +72,9 @@ jobs:
 
       - name: Rodar PHPUnit
         run: |
-          if [ -f vendor/bin/phpunit ]; then
+          cd api-eleitores
             vendor/bin/phpunit --log-junit report.xml
-          else
-            echo "PHPUnit não encontrado. Pulando testes."
-          fi
-
+            
       - name: Upload do Report de Teste
         if: success()
         uses: actions/upload-artifact@v4
