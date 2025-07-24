@@ -104,9 +104,9 @@ jobs:
 
       - name: Construir e Enviar Imagem
         run: |
-          docker build -t $DOCKER_IMAGE_NAME:latest .
-          docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:${{ github.run_number }}
-          docker push $DOCKER_IMAGE_NAME:latest
+          docker build -t $DOCKER_IMAGE_NAME:estertavares2025/eleitor-projeto-app .
+          docker tag $DOCKER_IMAGE_NAME:estertavares2025/eleitor-projeto-app $DOCKER_IMAGE_NAME:${{ github.run_number }}
+          docker push $DOCKER_IMAGE_NAME:estertavares2025/eleitor-projeto-app
           docker push $DOCKER_IMAGE_NAME:${{ github.run_number }}
 
   # STAGE: deploy
