@@ -130,11 +130,12 @@ jobs:
           cd infra
           terraform init
           terraform validate
-          terraform plan -out=tfplan
-          terraform apply -auto-approve 
-        env:
-            DOCKER_IMAGE_NAME: ${{ env.DOCKER_IMAGE_NAME }}
-            DOCKER_IMAGE_TAG: ${{ github.run_number }}
+          terraform plan \
+          -var="docker_image_name=${{ env.DOCKER_IMAGE_NAME }}" \
+          -var="docker_image_tag=${{ github.run_number }}" \
+          -var="koyeb_token=${{ secrets.KOYEB_TOKEN }}" \
+          -out=tfplan
+          terraform apply -auto-approve tfplan
 
   # STAGE: cleanup (manual only)
   cleanup:

@@ -7,26 +7,31 @@ terraform {
   }
 }
 
-# O token será lido automaticamente da variável de ambiente KOYEB_TOKEN
-provider "koyeb" {}
+provider "koyeb" {
+  token = var.koyeb_token
+}
 
 resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"
   name     = "web"
 
-  routes {
-    path = "/"
-  }
+  definition {
+    name = "web"
 
-  ports {
-    port     = 80
-    protocol = "HTTP"
-  }
+    docker {
+      image = "${var.docker_image_name}:${var.docker_image_tag}"
+    }
 
-  instance_type = "micro-1x"
-  regions       = ["fra"] # Frankfurt
+    ports {
+      port     = 80
+      protocol = "HTTP"
+    }
 
-  docker {
-    image = "${var.docker_image_name}:${var.docker_image_tag}"
+    routes {
+      path = "/"
+    }
+
+    instance_type = "micro-1x"
+    regions       = ["fra"]
   }
 }
