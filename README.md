@@ -17,15 +17,25 @@ Aplicação web 100% PHP para gerenciamento de eleitores, candidatos e votos. Ut
 
 
 ├── assets/ # Frontend (CSS, JS, imagens)
+
 ├── config/ # Configurações de banco e ambiente
+
 ├── .github/workflows/ # GitHub Actions (CI/CD)
+
 ├── index.php # Entrada principal
+
 ├── login.php / logout.php # Autenticação
+
 ├── generate_hash.php # Utilitário de hash de senha
+
 ├── Dockerfile # Imagem Docker
+
 ├── docker-compose.yml # Stack local (Apache + MySQL)
+
 ├── composer.json # Dependências
+
 ├── phpunit.xml # Testes
+
 └── .env # Variáveis de ambiente
 
 Documentação da API
