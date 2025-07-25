@@ -11,7 +11,6 @@ provider "koyeb" {}
 
 resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"
-  name     = "web"
  
   definition {
     name = "web"
