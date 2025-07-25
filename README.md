@@ -70,7 +70,7 @@ cd eleitor-projeto
 # Suba o ambiente com Docker
 docker-compose up -d
 
-# Acesse em http://localhost
+# Acesse em http://localhost:8080
 
 ⚙️ Configuração
 Copie o arquivo .env.example para .env e configure:
