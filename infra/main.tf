@@ -27,9 +27,17 @@ resource "koyeb_service" "eleitor" {
 
     routes {
       path = "/"
+      port = 80
     }
 
-    instance_type = "micro-1x"
-    regions       = ["fra"]
+    instance_types {
+      type = "micro-1x"
+      regions = ["fra"] # Frankfurt
+    }
+
+    scalings {
+      min = 1
+      max = 1
+    }
   }
 }
