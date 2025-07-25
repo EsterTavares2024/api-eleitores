@@ -53,7 +53,6 @@ CREATE TABLE api_tokens (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 -- dados para a tabela `users`
---
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
 (1, 'admin', '$2y$10$/QymJI5nOoQb6ewfhBxq3OnYGnCt1nnN/Zn.6.x3IF6iUeGL4hYVu', '2025-04-17 18:47:06'),
