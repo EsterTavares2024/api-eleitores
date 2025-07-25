@@ -15,7 +15,7 @@ Aplicação web 100% PHP para gerenciamento de eleitores, candidatos e votos. Ut
 
 ## 📁 Estrutura do Projeto
 
-/
+
 ├── assets/ # Frontend (CSS, JS, imagens)
 ├── config/ # Configurações de banco e ambiente
 ├── .github/workflows/ # GitHub Actions (CI/CD)
