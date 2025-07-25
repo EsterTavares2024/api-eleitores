@@ -1,14 +1,15 @@
 <?php
+$host = 'db';
+$port = '3306';
+$dbname = 'db';
+$user = 'admin';
+$pass = 'admin123';
 
-$host = getenv('DB_HOST') ?: '127.0.0.1';
-$dbname = getenv('DB_NAME') ?: 'db';
-$user = getenv('DB_USER') ?: 'admin';
-$pass = getenv('DB_PASS') ?: 'admin123';
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
 
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $conn;
-} catch (PDOException $e) {
-    die("Erro na conexão: " . $e->getMessage());
+// Verifica conexão
+if ($conn->connect_error) {
+    die("Erro na conexão: " . $conn->connect_error);
 }
+
+return $conn;

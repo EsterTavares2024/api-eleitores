@@ -12,8 +12,22 @@ RUN apt-get update && apt-get install -y \
 # Ativa o módulo de reescrita do Apache
 RUN a2enmod rewrite
 
-# Copia todos os arquivos da aplicação para o container
-COPY . .
+# Copia o projeto (inclua seu db.php junto ou abaixo no próximo bloco)
+COPY . /var/www/html/
+
+# Cria o arquivo de teste de conexão com o banco de dados
+RUN echo "<?php \
+\$host = 'db'; \
+\$db   = 'db'; \
+\$user = 'admin'; \
+\$pass = 'admin123'; \
+\$port = '3306'; \
+try { \
+    \$pdo = new PDO(\"mysql:host=\$host;port=\$port;dbname=\$db\", \$user, \$pass); \
+    echo 'Conexão com o banco de dados estabelecida com sucesso!'; \
+} catch (PDOException \$e) { \
+    echo 'Erro na conexão: ' . \$e->getMessage(); \
+}" > /var/www/html/dbtest.php
 
 # Corrige permissões
 RUN chown -R www-data:www-data /var/www/html \
