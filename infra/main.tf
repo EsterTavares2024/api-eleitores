@@ -15,7 +15,8 @@ resource "koyeb_service" "eleitor" {
 
   definition {
     name = "web"
-    regions  = ["fra"] # Frankfurt
+    instance_type = "nano-1x"         # corresponde à "Nano"
+    regions       = ["de-fra"]        # Frankfurt
 
     docker {
       image = "${var.docker_image_name}:${var.docker_image_tag}"
