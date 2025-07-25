@@ -133,6 +133,7 @@ jobs:
           terraform plan \
           -var="docker_image_name=${{ env.DOCKER_IMAGE_NAME }}" \
           -var="docker_image_tag=${{ github.run_number }}" \
+          -var="koyeb_token=${{ secrets.KOYEB_TOKEN }}" \
           -out=tfplan
           terraform apply -auto-approve tfplan
 

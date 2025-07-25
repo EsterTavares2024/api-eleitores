@@ -7,7 +7,9 @@ terraform {
   }
 }
 
-provider "koyeb" {}
+provider "koyeb" {
+  token = var.koyeb_token
+}
 
 resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"            

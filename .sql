@@ -52,7 +52,7 @@ CREATE TABLE api_tokens (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
---dados para a tabela `users`
+-- dados para a tabela `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES

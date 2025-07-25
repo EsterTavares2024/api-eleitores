@@ -8,3 +8,8 @@ variable "docker_image_tag" {
   type        = string
 }
 
+variable "koyeb_token" {
+  description = "Token da Koyeb"
+  type        = string
+  sensitive   = true
+}
