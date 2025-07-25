@@ -12,6 +12,8 @@ provider "koyeb" {}
 resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"
   name     = "web"
+  regions  = ["fra"] # Frankfurt
+
 
   definition {
     name = "web"
@@ -32,7 +34,6 @@ resource "koyeb_service" "eleitor" {
 
     instance_types {
       type = "micro-1x"
-      regions = ["fra"] # Frankfurt
     }
 
     scalings {

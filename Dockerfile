@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql mysqli zip \
     && apt-get clean
 
-# Ativa o módulo de reescrita do Apache
-RUN a2enmod rewrite
+# Ativa o módulo de reescrita e define ServerName para evitar warning do Apache
+RUN a2enmod rewrite && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Copia o projeto (inclua seu db.php junto ou abaixo no próximo bloco)
 COPY . /var/www/html/
