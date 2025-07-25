@@ -9,13 +9,9 @@ terraform {
 
 provider "koyeb" {}
 
-resource "koyeb_app" "eleitor" {
-  name = "eleitor-projeto"
-}
-
 resource "koyeb_service" "eleitor" {
-  app_id = koyeb_app.eleitor.id
- 
+  app_name = "eleitor-projeto"            
+
   definition {
     name = "web"
     regions  = ["fra"] # Frankfurt
