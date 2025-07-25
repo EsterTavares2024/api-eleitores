@@ -1,5 +1,8 @@
 <?php
-$host = 'db';
+
+$env = getenv('APP_ENV') === 'test' ? 'ci' : 'local';
+
+$host = $env === 'ci' ? '127.0.0.1' : 'db';
 $port = '3306';
 $dbname = 'db';
 $user = 'admin';
