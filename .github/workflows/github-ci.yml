@@ -133,8 +133,6 @@ jobs:
           terraform plan \
           -var="docker_image_name=${{ env.DOCKER_IMAGE_NAME }}" \
           -var="docker_image_tag=${{ github.run_number }}" \
-          -var="instance_type=nano-1x" \
-          -var="region=de-fra" \
           -out=tfplan
           terraform apply -auto-approve tfplan
 
