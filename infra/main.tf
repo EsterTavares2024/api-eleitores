@@ -9,8 +9,12 @@ terraform {
 
 provider "koyeb" {}
 
+resource "koyeb_app" "eleitor" {
+  name = "eleitor-projeto"
+}
+
 resource "koyeb_service" "eleitor" {
-  app_name = "eleitor-projeto"
+  app_id = koyeb_app.eleitor.id
  
   definition {
     name = "web"
