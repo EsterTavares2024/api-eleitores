@@ -10,13 +10,18 @@ terraform {
 provider "koyeb" {
 }
 
+variable "instance_type" {
+  default = ["nano-1x"]
+}
+variable "region" {
+  default = ["de-fra"]
+}
+
 resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"            
 
   definition {
     name = "web"
-    instance_type = "nano-1x"         # corresponde à "Nano"
-    regions       = ["de-fra"]        # Frankfurt
 
     docker {
       image = "${var.docker_image_name}:${var.docker_image_tag}"
