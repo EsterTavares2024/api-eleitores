@@ -12,11 +12,10 @@ provider "koyeb" {}
 resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"
   name     = "web"
-  regions  = ["fra"] # Frankfurt
-
-
+ 
   definition {
     name = "web"
+    regions  = ["fra"] # Frankfurt
 
     docker {
       image = "${var.docker_image_name}:${var.docker_image_tag}"
