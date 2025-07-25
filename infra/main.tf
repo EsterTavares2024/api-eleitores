@@ -22,7 +22,7 @@ resource "koyeb_service" "eleitor" {
 
     ports {
       port     = 80
-      protocol = "HTTP"
+      protocol = "http"
     }
 
     routes {
