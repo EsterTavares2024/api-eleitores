@@ -8,7 +8,6 @@ terraform {
 }
 
 provider "koyeb" {
-  token = var.koyeb_token
 }
 
 resource "koyeb_service" "eleitor" {
