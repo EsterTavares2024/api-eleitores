@@ -15,7 +15,7 @@ resource "koyeb_service" "eleitor" {
 
   definition {
     name = "web"
-    regions = ["de-fra"]  
+    regions = ["fra"] 
 
     docker {
       image = "${var.docker_image_name}:${var.docker_image_tag}"
