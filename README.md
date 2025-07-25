@@ -28,6 +28,29 @@ Aplicação web 100% PHP para gerenciamento de eleitores, candidatos e votos. Ut
 ├── phpunit.xml # Testes
 └── .env # Variáveis de ambiente
 
+Documentação da API
+
+Utilize os comandos abaixo para testar os endpoints da API autenticados com seu token:
+
+1. Criar Eleitor
+curl --location 'http://localhost/admin/api/customer/create.php' \
+--header 'Authorization: Bearer [SEU_TOKEN_AQUI]' \
+--header 'Content-Type: application/json' \
+--data '{
+  "name": "Eleitor Teste",
+  "cpf": "08920194920",
+  "candidate_id": 1001,
+  "neighborhood": "Centro",
+  "cep": "12345-678",
+  "necessity": "Precisa de transporte"
+}'
+
+2. Listar Candidatos
+curl --location 'http://localhost/admin/api/candidates/list.php' \
+--header 'Authorization: Bearer [SEU_TOKEN_AQUI]'
+3. Listar Eleitores
+curl --location 'http://localhost/admin/api/customer/list.php' \
+--header 'Authorization: Bearer [SEU_TOKEN_AQUI]'
 
 ## 🧪 Como rodar localmente
 
