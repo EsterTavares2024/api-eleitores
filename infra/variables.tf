@@ -8,3 +8,8 @@ variable "docker_image_tag" {
   type        = string
 }
 
+variable "koyeb_api_token" {
+  description = "Token da API Koyeb para autenticação."
+  type        = string
+  sensitive   = true 
+}

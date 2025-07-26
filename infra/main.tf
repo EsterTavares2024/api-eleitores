@@ -7,15 +7,18 @@ terraform {
   }
 }
 
-provider "koyeb" {
-}
+provider "koyeb" {}
 
 resource "koyeb_service" "eleitor" {
-  app_name = "eleitor-projeto"            
+  app_name = "eleitor-projeto"
 
   definition {
-    name = "web"
-    regions = ["aws-us-east-1"]
+    name    = "web"
+    regions = ["fra"] 
+
+    instance_types {
+      type = "eco-small" 
+    }
 
     docker {
       image = "${var.docker_image_name}:${var.docker_image_tag}"
@@ -30,9 +33,7 @@ resource "koyeb_service" "eleitor" {
       path = "/"
       port = 80
     }
-    instance_types {
-      type = 	"xlarge-1x" 
-    }
+
     scalings {
       min = 1
       max = 1
