@@ -12,7 +12,8 @@ env:
   DOCKER_IMAGE_NAME: eleitor-projeto
   DOCKER_REGISTRY: docker.io
   SERVICE_NAME: eleitor-projeto
-  KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
+  KOYEB_TOKEN: ${{h9f691303thi7wow9ycje31m69a70v1xixpq2faypqcjtxxyedrlq50vlojaeong}}
+
 
 jobs:
   # STAGE: build-lint
@@ -117,7 +118,7 @@ jobs:
     name: Deploy para Koyeb
     runs-on: ubuntu-latest
     needs: release
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - name: Checkout Código
         uses: actions/checkout@v4
