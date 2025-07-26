@@ -13,11 +13,11 @@ resource "koyeb_service" "eleitor" {
   app_name = "eleitor-projeto"
 
   definition {
-    name    = "web"
+    name    = "eleitor-projeto"
     regions = ["fra"] 
 
     instance_types {
-      type = "eco-small" 
+      type = ["micro-1x"] 
     }
 
     docker {
