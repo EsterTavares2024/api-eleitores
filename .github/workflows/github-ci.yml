@@ -12,7 +12,7 @@ env:
   DOCKER_IMAGE_NAME: eleitor-projeto
   DOCKER_REGISTRY: docker.io
   SERVICE_NAME: eleitor-projeto
-  KOYEB_TOKEN: ${{h9f691303thi7wow9ycje31m69a70v1xixpq2faypqcjtxxyedrlq50vlojaeong}}
+  KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
 
 
 jobs:
