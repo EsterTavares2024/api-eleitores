@@ -38,7 +38,7 @@ Aplicação web 100% PHP para gerenciamento de eleitores, candidatos e votos. Ut
 
 └── .env # Variáveis de ambiente
 
-Documentação da API
+## Documentação da API
 
 Utilize os comandos abaixo para testar os endpoints da API autenticados com seu token:
 
@@ -53,13 +53,13 @@ curl --location 'http://localhost8080/admin/api/customer/create.php' \
   "neighborhood": "Centro",
   "cep": "12345-678",
   "necessity": "Precisa de transporte"
-}'
 
-2. Listar Candidatos
+
+1. Listar Candidatos
 curl --location 'http://localhost8080/admin/api/candidates/list.php' \
 --header 'Authorization: Bearer [SEU_TOKEN_AQUI]'
 
-3. Listar Eleitores
+2. Listar Eleitores
 curl --location 'http://localhost:8080/admin/api/customer/list.php' \
 --header 'Authorization: Bearer [SEU_TOKEN_AQUI]'
 
@@ -83,7 +83,7 @@ docker-compose up -d
 
 # Acesse em http://localhost:8080
 
-⚙️ Configuração
+##  ⚙️ Configuração
 Copie o arquivo .env.example para .env e configure:
 
 env
@@ -94,14 +94,14 @@ DB_NAME=eleitor
 DB_USER=admin
 DB_PASSWORD=admin123
 
-🧪 Testes
+## 🧪 Testes
 Rodar testes com PHPUnit:
 
 Copiar
 Editar
 vendor/bin/phpunit
 
-📦 Deploy (CI/CD)
+## 📦 Deploy (CI/CD)
 
 A aplicação está preparada para deploy automatizado via GitHub Actions utilizando:
 
@@ -125,6 +125,6 @@ GitHub Actions
 
 Terraform + Koyeb
 
-📝 Licença
+## 📝 Licença
 
 Este projeto é licenciado sob a licença MIT.
