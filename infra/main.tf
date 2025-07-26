@@ -15,7 +15,8 @@ resource "koyeb_service" "eleitor" {
 
   definition {
     name = "web"
-    regions = ["fra"]
+    regions        = ["iad"]
+    instance_types = ["nano-1x"]
 
     docker {
       image = "${var.docker_image_name}:${var.docker_image_tag}"
@@ -29,10 +30,6 @@ resource "koyeb_service" "eleitor" {
     routes {
       path = "/"
       port = 80
-    }
-
-    instance_types {
-      type = "micro-1x"
     }
 
     scalings {
