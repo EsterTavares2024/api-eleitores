@@ -82,6 +82,8 @@ cd eleitor-projeto
 docker-compose up -d
 
 Imagem no cloudhub:
+https://hub.docker.com/r/estertavares2025/eleitor-projeto-app
+
 estertavares2025/eleitor-projeto-app:latest
 
 # Acesse em http://localhost:8080
